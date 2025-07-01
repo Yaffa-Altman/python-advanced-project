@@ -1,128 +1,72 @@
-
-markdown
-Copy
-Edit
-# Python Advanced Project
+# Code Analysis System – wit push Integration
 
 ## 📌 Overview
 
-This project is a **Flask-based web application** that simulates an online book management system.  
-It supports user registration and login, and provides a simple API to manage books, including creation, retrieval, update, and deletion (CRUD operations).  
-The app also implements authentication using JWT and utilizes advanced Python concepts like custom decorators and object-oriented design.
+This project is a **backend system** developed as part of a final project. It integrates with the `wit push` command to ensure high-quality Python code is maintained across all commits. The system performs code analysis using the Abstract Syntax Tree (AST) module, detects common issues, and generates visual graphs with insights using Matplotlib. It simulates a basic form of internal CI (Continuous Integration) focused on code quality.
 
----
+### Key Features:
+- **Code Quality Checks**:
+  - Function Length: Warns if a function exceeds 20 lines.
+  - File Length: Warns if a file exceeds 200 lines.
+  - Unused Variables: Warns if a variable is assigned but never used.
+  - Missing Docstrings: Warns if a function lacks a documentation string.
+  - BONUS: Warns about variables written in non-English letters.
 
-## ⚙️ Installation & Execution
+- **Visual Graphs**:
+  - Histogram: Distribution of function lengths.
+  - Pie Chart: Number of issues per issue type.
+  - Bar Chart: Number of issues per file.
+  - BONUS: Line graph tracking the number of issues over time.
 
-### Prerequisites
-- Python 3.10+
-- `pip` package manager
+- **API Endpoints**:
+  - `/analyze`: Accepts Python files and returns visual graphs.
+  - `/alerts`: Accepts Python files and returns issue warnings.
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/MiriShulman/python-advanced-project.git
-cd python-advanced-project
-2. Create a virtual environment (optional but recommended)
-bash
-Copy
-Edit
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-3. Install dependencies
-bash
-Copy
-Edit
-pip install -r requirements.txt
-4. Run the app
-bash
-Copy
-Edit
-python main.py
-The API will be available at http://127.0.0.1:5000/
+This system is implemented using FastAPI for the backend server and integrates with the `wit` version control system for code analysis during `push` operations.
 
-📁 Project Structure
-bash
-Copy
-Edit
-python-advanced-project/
-│
-├── main.py                # Entry point – initializes and runs the Flask app
-├── auth.py                # Handles user authentication and JWT logic
-├── book.py                # Book model and business logic
-├── user.py                # User model and user-related endpoints
-├── decorator.py           # Custom route decorators (e.g., JWT validation)
-├── utils.py               # Utility functions for token handling, error messages, etc.
-├── requirements.txt       # List of required Python packages
-└── README.md              # Project documentation
-🌐 API Endpoints
-🔐 Authentication
-POST /register
-Register a new user.
-Body:
+## Installation Instructions
 
-json
-Copy
-Edit
-{
-  "username": "your_name",
-  "password": "your_password"
-}
-POST /login
-Logs in a user and returns a JWT token.
-Body:
+1. **Clone the Repository**:
+   git clone https://github.com/MiriShulman/python-advanced-project.git
+   cd <repository-directory>
+2. Create a Virtual Environment (optional but recommended):
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+3. Install Dependencies:
+   pip install -r requirements.txt
 
-json
-Copy
-Edit
-{
-  "username": "your_name",
-  "password": "your_password"
-}
-📚 Book Management (Requires JWT Token in Authorization header)
-GET /books
-Retrieve all books.
-Headers:
+## Execution Instructions
+1. Change the path in the wit.bat file to the path of main.py in your project.
+3. ## Use the Command Line Interface (CLI)
 
-makefile
-Copy
-Edit
-Authorization: Bearer <your_token>
-GET /books/<book_id>
-Retrieve a single book by ID.
+You can interact with the Wit version control system using the CLI commands. Here are some examples:
 
-POST /books
-Create a new book.
-Body:
-
-json
-Copy
-Edit
-{
-  "title": "Book Title",
-  "author": "Author Name",
-  "year": 2023
-}
-PUT /books/<book_id>
-Update an existing book.
-Body:
-
-json
-Copy
-Edit
-{
-  "title": "Updated Title",
-  "author": "Updated Author",
-  "year": 2024
-}
-DELETE /books/<book_id>
-Delete a book by ID.
-
-✅ Features
-RESTful API structure
-
-JWT Authentication
-
-Modular code using classes and decorators
-
-Input validation and error handling
-
+- **Initialize the Wit Repository**:
+  ```bash
+  wit init
+  ```
+  
+- **Add a File:**:
+  ```bash
+  wit add <file_name>
+  ```
+  
+- **Log Commits:**:
+  ```bash
+  wit log
+  ```
+  
+- **Check Status:**:
+  ```bash
+  wit status
+  ```
+  
+- **Checkout a Commit:**:
+  ```bash
+  wit checkout <commit_id>
+  ```
+  
+- **Push Changes:**:
+  ```bash
+    wit push
+  ```
