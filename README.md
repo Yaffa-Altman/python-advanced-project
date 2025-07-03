@@ -37,6 +37,8 @@ This system is implemented using FastAPI for the backend server and integrates w
 
 ## Execution Instructions
 1. Change the path in the wit.bat file to the path of main.py in your project.
+2. Add the path of your project to the system environment variable 'Path': 
+   Search in your PC 'Advanced system settings' -> 'Environment Variables' -> In 'System variables' section, find 'Path', select it -> Edit -> New -> Paste here your project path -> OK -> OK -> OK.
 3. ## Use the Command Line Interface (CLI)
 
 You can interact with the Wit version control system using the CLI commands. Here are some examples:
@@ -66,7 +68,64 @@ You can interact with the Wit version control system using the CLI commands. Her
   wit checkout <commit_id>
   ```
   
-- **Push Changes:**:
+- **Runs code analysis and returns visual insights:**:
   ```bash
     wit push
   ```
+## Folder Structure
+
+project/
+├── images/
+├── api.py
+├── cli.py
+├── graphs.py
+├── main.py
+├── our_ast.py
+├── README.md
+├── requirements.txt
+├── test.py
+├── wit.py
+├── wit.bat
+
+## API Endpoints
+
+The following endpoints are available in the system:
+
+### **`POST /alerts`**
+Analyzes the given project folder and returns detected problems or alerts.
+
+**Request Example:**
+```json
+{
+  "path": "path/to/your/project"
+}
+```
+**Response Example:**
+```json
+{
+  "problems": {
+    "file1.py": 3,
+    "file2.py": 1
+  }
+}
+```
+
+### **`POST /analyze`**
+Performs code analysis and generates visual graphs based on code structure and detected issues.
+
+**Request Example:**
+```json
+{
+  "path": "path/to/your/project"
+}
+```
+**Response Example:**
+```json
+{
+  "images": [
+    "./images/number_of_issues_per_file.png",
+    "./images/pie_chart_number_of_issues.png",
+    "./images/histogram_functions_lengths.png"
+  ]
+}
+```

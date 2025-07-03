@@ -6,12 +6,12 @@ from test import problems
 from test import function_length_list
 from collections import Counter
 
-def all_graghs(file_path):
-    get_pie_chart_gragh_about_number_of_issues(file_path)
-    get_number_of_issues_per_file(file_path)
-    get_histogram_gragh_about_function_lengths(file_path)
+def all_graghs():
+    get_pie_chart_gragh_about_number_of_issues()
+    get_number_of_issues_per_file()
+    get_histogram_gragh_about_function_lengths()
 
-def get_histogram_gragh_about_function_lengths(file_path):
+def get_histogram_gragh_about_function_lengths():
     plt.hist(function_length_list, edgecolor='black')
 
     plt.title('Distribution of function lengths')
@@ -20,19 +20,16 @@ def get_histogram_gragh_about_function_lengths(file_path):
     plt.show()
     plt.savefig(f'./images/histogram_functions_lengths.png')
     plt.close()
-    plt.show()
 
-def get_pie_chart_gragh_about_number_of_issues(file_path):
+def get_pie_chart_gragh_about_number_of_issues():
     count = Counter(problems)
     labels = list(count.keys())
     sizes = list(count.values())
-
     sizes = np.array(sizes)
 
     valid_indices = ~np.isnan(sizes) & (sizes > 0)
     sizes = sizes[valid_indices]
-    labels = [label for i, label in enumerate(labels) if valid_indices[i]]
-
+    labels = [label for i, label in enumerate(labels) if valid_indices[i]] # check if its מסונכרן good
 
     # בדוק אם יש ערכים חוקיים לפני הצגת הגרף
     if sizes.size > 0:
@@ -44,11 +41,11 @@ def get_pie_chart_gragh_about_number_of_issues(file_path):
     else:
         print("No valid data to display in pie chart.")
 
-def get_number_of_issues_per_file(file_path):
+def get_number_of_issues_per_file():
     counts = {file: len(problems) for file, problems in problems_per_file.items()}
     files = counts.keys()
     issue_counts = counts.values()
-
+    # print("files: ", problems_per_file)
     plt.bar(files, issue_counts)
     plt.xlabel('Files')
     plt.ylabel('Number of Issues')

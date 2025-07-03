@@ -8,7 +8,9 @@ problems = {}
 problems_per_file = defaultdict(list)
 file_name = ''
 
+
 def open_dir(dir_path):
+    global function_length_list
     function_length_list = []
     problems["too long function"] = 0
     problems["too long file"] = 0
@@ -18,14 +20,16 @@ def open_dir(dir_path):
         call_functions(dir_path)
         return
     files = os.listdir(dir_path)
-    for file_name in files:
-        file_path = os.path.join(dir_path, file_name)
+    for file in files:
+        global file_name
+        file_name = os.path.basename(file)
+        file_path = os.path.join(dir_path, file)
         if os.path.isfile(file_path):
-            if file_name.endswith('.py'):
-                print(file_path)
+            if file.endswith('.py'):
                 call_functions(file_path)
         elif os.path.isdir(file_path):
             open_dir(file_path)
+
 
 def call_functions(file_path):
     request_func_len = function_length(file_path)
@@ -47,6 +51,7 @@ def call_functions(file_path):
         problems[request_missing_docstrings] = problems[request_missing_docstrings] + 1
         problems_per_file[file_name].append(request_missing_docstrings)
 
+
 def get_functions_length(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         spaces = 0
@@ -55,7 +60,6 @@ def get_functions_length(file_path):
         for line in file:
             if line.startswith('def '):
                 function_length_list.append(length)
-                print(length)
                 length = 0
                 spaces = len(line) - len(line.lstrip())
             else:
@@ -66,12 +70,14 @@ def get_functions_length(file_path):
             function_length_list.append(length)
     return function_length_list
 
+
 def function_length(file_path):
     list_length = get_functions_length(file_path)
     for leng in list_length:
         if leng > 20:
             return "too long function"
     return False
+
 
 def get_file_length(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -80,9 +86,10 @@ def get_file_length(file_path):
             line_number += 1
         return line_number
 
+
 def file_length(file_path):
     this_file_length = get_file_length(file_path)
-    if this_file_length > 200:
+    if this_file_length > 80:  # have to change it to 200
         return "too long file"
     return False
 
@@ -91,6 +98,7 @@ def variable_unused(file_path):
     if if_variable_unused(file_path):
         return "variables unused"
     return False
+
 
 def missing_docstrings(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -108,7 +116,7 @@ def missing_docstrings(file_path):
 
             if inside_function and current_indent <= function_indent:
                 if not missing_docstring:
-                    return  "missing docstring"
+                    return "missing docstring"
                 missing_docstring = False
                 inside_function = False
 
@@ -117,4 +125,3 @@ def missing_docstrings(file_path):
                     missing_docstring = True
                     continue
     return False
-

@@ -31,7 +31,6 @@ def if_variable_unused(file_path):
         tree = ast.parse(code)
         visitor = VariableVisitor()
         visitor.visit(tree)
-
         unused_variables = visitor.defined_variables - visitor.used_variables
         return unused_variables
     except SyntaxError:

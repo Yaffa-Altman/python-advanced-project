@@ -1,7 +1,7 @@
 import click
 
 from graghs import get_histogram_gragh_about_function_lengths, get_number_of_issues_per_file, \
-    get_pie_chart_gragh_about_number_of_issues
+    get_pie_chart_gragh_about_number_of_issues, all_graghs
 from wit import Wit
 from test import *
 
@@ -52,13 +52,11 @@ cli.add_command(checkout_cmd, name='checkout')
 cli.add_command(commit_cmd, name='commit')
 
 if __name__ == '__main__':
-    path = r'C:\Users\1\Documents\מירי לימודים\יד\python\python project\wit'
+    path = r'C:\Users\The user\Desktop\תכנות\שנה ב\Python\Python מתקדם\HomeWork\3'
 
     open_dir(path)
-    get_number_of_issues_per_file(path)
-    get_pie_chart_gragh_about_number_of_issues(path)
-    print(variable_unused(path))
+    all_graghs()
     wit = Wit()
     cli()
-    # wit.ast()
+    # print(wit.ast())
 

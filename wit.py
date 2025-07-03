@@ -164,10 +164,12 @@ class Wit:
         try:
             path = self.__path
 
-            url1 = "http://localhost:8000//analyze"
-            url2 = "http://localhost:8000//alerts"
+            url1 = "http://localhost:5000//analyze"
+            url2 = "http://localhost:5000//alerts"
 
-            data_path = path
+            data_path = {
+                "path": path
+            }
 
             response_graghs = requests.post(url1, json=data_path)
             response_alerts = requests.post(url2, json=data_path)
