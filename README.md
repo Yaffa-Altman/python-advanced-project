@@ -73,7 +73,7 @@ You can interact with the Wit version control system using the CLI commands. Her
     wit push
   ```
 ## Folder Structure
-
+```plaintext
 project/
 ├── images/
 ├── api.py
@@ -86,7 +86,7 @@ project/
 ├── test.py
 ├── wit.py
 ├── wit.bat
-
+```
 ## API Endpoints
 
 The following endpoints are available in the system:
