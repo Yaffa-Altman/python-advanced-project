@@ -104,8 +104,8 @@ Analyzes the given project folder and returns detected problems or alerts.
 ```json
 {
   "problems": {
-    "file1.py": 3,
-    "file2.py": 1
+    "file1.py": ["problem1"],
+    "file2.py": ["problem1", "problem2"]
   }
 }
 ```

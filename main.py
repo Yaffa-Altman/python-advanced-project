@@ -52,10 +52,10 @@ cli.add_command(checkout_cmd, name='checkout')
 cli.add_command(commit_cmd, name='commit')
 
 if __name__ == '__main__':
-    path = r'C:\Users\The user\Desktop\תכנות\שנה ב\Python\Python מתקדם\HomeWork\3'
-
-    open_dir(path)
-    all_graghs()
+    # path = r'C:\Users\The user\Desktop\תכנות\שנה ב\Python\Python מתקדם\HomeWork\3'
+    #
+    # open_dir(path)
+    # all_graghs()
     wit = Wit()
     cli()
     # print(wit.ast())
